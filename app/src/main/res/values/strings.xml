@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Awantura o kasę</string>
+    <string name="title_activity_app">AppActivity</string>
+
+    <string name="generic_error">Something wrong happened. Please try again.</string>
+    <string name="email_error">Please insert a valid email.</string>
+    <string name="empty_password_error">Password cannot be empty.</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="sign_in">Sign in</string>
+</resources>

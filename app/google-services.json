@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "749612288818",
+    "project_id": "awantura-o-kase",
+    "storage_bucket": "awantura-o-kase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749612288818:android:71ddf2aba065799c43652b",
+        "android_client_info": {
+          "package_name": "com.euvic.awanturaokase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBywyTH-bEk8uwMAnz-fba-9dwQLZ7RxQo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
