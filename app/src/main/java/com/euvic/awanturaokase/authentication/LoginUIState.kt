@@ -1,4 +1,4 @@
-package com.euvic.awanturaokase
+package com.euvic.awanturaokase.authentication
 
 data class LoginUiState(
     val email: String = "",

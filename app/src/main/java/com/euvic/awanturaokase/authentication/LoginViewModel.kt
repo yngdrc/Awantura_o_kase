@@ -1,9 +1,16 @@
-package com.euvic.awanturaokase
+package com.euvic.awanturaokase.authentication
 
 import androidx.compose.runtime.mutableStateOf
+import com.euvic.awanturaokase.AppViewModel
+import com.euvic.awanturaokase.R
+import com.euvic.awanturaokase.home.HOME_SCREEN_KEY
+import com.euvic.awanturaokase.isValidEmail
 import com.euvic.awanturaokase.service.AccountService
 import com.euvic.awanturaokase.snackBar.SnackBarManager
 import com.euvic.awanturaokase.snackBar.SnackBarMessage
+import com.google.firebase.auth.AuthResult
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -39,8 +46,22 @@ class LoginViewModel @Inject constructor(
         }
 
         launchCatching {
-            accountService.authenticate(email, password)
-            SnackBarManager.showMessage(SnackBarMessage.StringSnackBar(message = "Logged in"))
+            accountService.authenticate(
+                email = email,
+                password = password,
+                onSuccessAction = { authResult ->
+                    SnackBarManager.showMessage(
+                        message = SnackBarMessage.StringSnackBar(message = "Logged in")
+                    ).also {
+                        action.invoke("$HOME_SCREEN_KEY/${authResult.user?.email}")
+                    }
+                },
+                onFailureAction = { exception ->
+                    SnackBarManager.showMessage(
+                        message = SnackBarMessage.StringSnackBar(message = exception.toString())
+                    )
+                }
+            )
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.euvic.awanturaokase
+package com.euvic.awanturaokase.authentication
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,10 +11,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.euvic.awanturaokase.composable.BasicButton
-import com.euvic.awanturaokase.composable.BasicTextButton
 import com.euvic.awanturaokase.composable.EmailField
 import com.euvic.awanturaokase.composable.PasswordField
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.euvic.awanturaokase.R
+import com.euvic.awanturaokase.basicButton
+import com.euvic.awanturaokase.fieldModifier
+import com.google.firebase.auth.AuthResult
 
 const val LOGIN_SCREEN_KEY = "LoginScreen"
 
@@ -33,6 +36,8 @@ fun LoginScreen(
     ) {
         EmailField(uiState.email, viewModel::onEmailChange, Modifier.fieldModifier())
         PasswordField(uiState.password, viewModel::onPasswordChange, Modifier.fieldModifier())
-        BasicButton(R.string.sign_in, Modifier.basicButton()) { viewModel.onSignInClick(action) }
+        BasicButton(R.string.sign_in, Modifier.basicButton()) {
+            viewModel.onSignInClick(action)
+        }
     }
 }

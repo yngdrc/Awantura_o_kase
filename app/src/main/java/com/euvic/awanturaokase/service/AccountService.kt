@@ -1,6 +1,7 @@
 package com.euvic.awanturaokase.service
 
-import com.euvic.awanturaokase.User
+import com.euvic.awanturaokase.authentication.User
+import com.google.firebase.auth.AuthResult
 import kotlinx.coroutines.flow.Flow
 
 interface AccountService {
@@ -9,7 +10,12 @@ interface AccountService {
 
     val currentUser: Flow<User>
 
-    suspend fun authenticate(email: String, password: String)
+    suspend fun authenticate(
+        email: String,
+        password: String,
+        onSuccessAction: (AuthResult) -> Unit = {},
+        onFailureAction: (Exception) -> Unit = {}
+    ): AuthResult
     suspend fun sendRecoveryEmail(email: String)
     suspend fun createAnonymousAccount()
     suspend fun linkAccount(email: String, password: String)

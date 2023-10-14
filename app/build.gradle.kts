@@ -83,4 +83,6 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     implementation("com.google.dagger:hilt-android:2.47")
     ksp("com.google.dagger:hilt-compiler:2.47")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
+    implementation("com.google.code.gson:gson:2.10.1")
 }
