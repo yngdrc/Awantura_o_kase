@@ -13,36 +13,31 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewModelScope
-import com.euvic.awanturaokase.R
-import com.euvic.awanturaokase.authentication.LoginViewModel
-import com.euvic.awanturaokase.basicButton
-import com.euvic.awanturaokase.composable.BasicButton
-import com.euvic.awanturaokase.composable.BasicField
-import com.euvic.awanturaokase.composable.EmailField
-import com.euvic.awanturaokase.composable.PasswordField
-import com.euvic.awanturaokase.fieldModifier
-import com.google.firebase.auth.FirebaseUser
-import com.google.gson.GsonBuilder
-
-const val HOME_SCREEN_KEY = "HomeScreen"
+import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+import com.euvic.awanturaokase.home.HomeRoute.Companion.ARGUMENT_NAME_EMAIL
+import kotlinx.parcelize.Parcelize
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    email: String?,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState
+    val email = viewModel.savedStateHandle.get<String>(ARGUMENT_NAME_EMAIL)
 
     Column(
-        modifier = modifier.fillMaxWidth().fillMaxHeight().verticalScroll(rememberScrollState()),
+        modifier = modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         TextField(
-            value = email.toString(),
+            value = email ?: "",
             onValueChange = {},
             readOnly = true
         )

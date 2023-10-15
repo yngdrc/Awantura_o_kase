@@ -17,9 +17,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.euvic.awanturaokase.R
 import com.euvic.awanturaokase.basicButton
 import com.euvic.awanturaokase.fieldModifier
-import com.google.firebase.auth.AuthResult
-
-const val LOGIN_SCREEN_KEY = "LoginScreen"
 
 @Composable
 fun LoginScreen(

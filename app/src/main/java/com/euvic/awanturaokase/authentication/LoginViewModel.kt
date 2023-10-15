@@ -3,14 +3,12 @@ package com.euvic.awanturaokase.authentication
 import androidx.compose.runtime.mutableStateOf
 import com.euvic.awanturaokase.AppViewModel
 import com.euvic.awanturaokase.R
-import com.euvic.awanturaokase.home.HOME_SCREEN_KEY
+import com.euvic.awanturaokase.home.HomeRoute
+import com.euvic.awanturaokase.home.HomeRoute.Companion.ARGUMENT_NAME_EMAIL
 import com.euvic.awanturaokase.isValidEmail
 import com.euvic.awanturaokase.service.AccountService
 import com.euvic.awanturaokase.snackBar.SnackBarManager
 import com.euvic.awanturaokase.snackBar.SnackBarMessage
-import com.google.firebase.auth.AuthResult
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -53,7 +51,11 @@ class LoginViewModel @Inject constructor(
                     SnackBarManager.showMessage(
                         message = SnackBarMessage.StringSnackBar(message = "Logged in")
                     ).also {
-                        action.invoke("$HOME_SCREEN_KEY/${authResult.user?.email}")
+                        val email = authResult.user?.email ?: return@also
+                        val routeWithArgs = HomeRoute.prepareRouteWithArgs(
+                            values = mapOf(ARGUMENT_NAME_EMAIL to email)
+                        )
+                        action.invoke(routeWithArgs)
                     }
                 },
                 onFailureAction = { exception ->

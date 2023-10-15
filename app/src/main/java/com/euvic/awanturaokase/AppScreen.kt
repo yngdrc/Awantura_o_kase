@@ -29,16 +29,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.euvic.awanturaokase.authentication.LOGIN_SCREEN_KEY
+import com.euvic.awanturaokase.authentication.LoginRoute
 import com.euvic.awanturaokase.authentication.LoginScreen
-import com.euvic.awanturaokase.home.HOME_SCREEN_KEY
+import com.euvic.awanturaokase.home.HomeRoute
 import com.euvic.awanturaokase.home.HomeScreen
 import com.euvic.awanturaokase.snackBar.SnackBarManager
 import com.euvic.awanturaokase.ui.theme.AwanturaOKasęTheme
 import com.google.accompanist.systemuicontroller.SystemUiController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.CoroutineScope
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -68,7 +66,7 @@ fun AppScreen() {
             ) { innerPaddingModifier ->
                 NavHost(
                     navController = appState.navHostController,
-                    startDestination = LOGIN_SCREEN_KEY,
+                    startDestination = "Login",
                     modifier = Modifier.padding(innerPaddingModifier)
                 ) {
                     makeNavGraph(appState)
@@ -111,23 +109,15 @@ fun resources(): Resources {
     return LocalContext.current.resources
 }
 
-@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 fun NavGraphBuilder.makeNavGraph(appState: AppState) {
-    composable(route = LOGIN_SCREEN_KEY) {
+    composable(route = LoginRoute.LOGIN_ROUTE_KEY) {
         LoginScreen(action = { route -> appState.navigate(route = route) })
     }
 
     composable(
-        route = "$HOME_SCREEN_KEY/{email}",
-        arguments = listOf(
-            navArgument(name = "email") {
-                type = NavType.StringType
-                nullable = true
-            }
-        )
-    ) { backStackEntry ->
-        HomeScreen(
-            email = backStackEntry.arguments?.getString("email")
-        )
+        route = HomeRoute.preparedRoute,
+        arguments = HomeRoute.navArguments
+    ) {
+        HomeScreen()
     }
 }

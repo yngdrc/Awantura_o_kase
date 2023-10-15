@@ -1,11 +1,9 @@
 package com.euvic.awanturaokase
 
-import android.app.StatusBarManager
 import android.content.res.Resources
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Stable
 import androidx.navigation.NavHostController
-import androidx.navigation.NavOptionsBuilder
 import com.euvic.awanturaokase.snackBar.SnackBarManager
 import com.euvic.awanturaokase.snackBar.SnackBarMessage.Companion.toMessage
 import com.google.accompanist.systemuicontroller.SystemUiController
